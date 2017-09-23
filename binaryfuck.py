@@ -3,7 +3,8 @@ import sys
 first_tape = [0]
 second_tape = [0]
 code = sys.argv[1]
-debug = sys.argv[2] == "-s"
+tapes = "-t" in sys.argv[2:]
+debug = "-d" in sys.argv[2:]
 stdin = sys.stdin.read()
 tape_head = 0
 code_index = 0
@@ -34,6 +35,13 @@ while code_index < len(code):
 		first_tape[tape_head] &= second_tape[tape_head]
 	if char == "|":
 		first_tape[tape_head] |= second_tape[tape_head]
+	if char == "~":
+		first_tape[tape_head] = ~first_tape[tape_head]
+	if char == "@":
+		first_tape, second_tape = second_tape, first_tape
+	if char == "%":
+		first_tape[tape_head], second_tape[tape_head] = second_tape[tape_head], first_tape[tape_head]
+
 	if char == "+":
 		first_tape[tape_head] += 1
 	if char == "-":
@@ -53,8 +61,6 @@ while code_index < len(code):
 	if char == ",":
 		first_tape[tape_head] = ord(stdin[input_index]) if input_index < len(stdin) else -1
 		input_index += 1
-	if char == "@":
-		first_tape, second_tape = second_tape, first_tape
 	if char == "[":
 		loop_depth += 1
 		if not first_tape[tape_head]:
@@ -66,7 +72,12 @@ while code_index < len(code):
 			loop_depth -= 1
 	code_index += 1
 
-if debug:
+	if debug:
+		print(char, code_index, tape_head, first_tape, second_tape)
+
+if tapes:
 	if '.' in code: print()
+	while first_tape and first_tape[-1] == 0: first_tape.pop()
+	while second_tape and second_tape[-1] == 0: second_tape.pop()
 	print(first_tape)
 	print(second_tape)
