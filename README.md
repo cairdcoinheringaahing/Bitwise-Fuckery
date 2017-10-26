@@ -9,7 +9,7 @@ This version/derivative adds in 6 new commands to brainfuck, as well as two comm
     | - Bitwise OR
     ^ - Bitwise XOR
     ~ - Bitwise NOT
-    % - Copy the value under the tape head to the second stack
+    % - Copy the value under the tape head to the second tape
     @ - Swap the values of the tapes, preserving order
     
 The flags are:
