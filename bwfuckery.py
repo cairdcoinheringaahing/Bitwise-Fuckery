@@ -8,6 +8,7 @@ second_tape = [0]
 code = sys.argv[1]
 tapes = "-t" in sys.argv[2:]
 debug = "-d" in sys.argv[2:]
+numeric = "-n" in sys.argv[2:]
 stdin = sys.stdin.read()
 tape_head = 0
 code_index = 0
@@ -60,23 +61,25 @@ while code_index < len(code):
 		if tape_head < 0:
 			tape_head %= len(first_tape)
 	if char == ".":
-		print(end=chr(abs(int(first_tape[tape_head]))))
+		if numeric: func = str
+		else: func = chr
+		print(end=func(abs(int(first_tape[tape_head]))))
 	if char == ",":
 		first_tape[tape_head] = ord(stdin[input_index]) if input_index < len(stdin) else -1
 		input_index += 1
 	if char == "[":
 		loop_depth += 1
-		if not first_tape[tape_head]&1:
+		if (not first_tape[tape_head]&1) or (not first_tape[tape_head]):
 			code_index = nth_index(code, "]", loop_depth, -1)
 	if char == "]":
-		if first_tape[tape_head]&1:
+		if (first_tape[tape_head]&1) or (first_tape[tape_head]):
 			code_index = nth_index(code, "[", loop_depth, 1)
 		else:
 			loop_depth -= 1
 	code_index += 1
 
 	if debug:
-		print(char, code_index, tape_head, first_tape, second_tape)
+		print(char, code_index, tape_head, first_tape, second_tape, first_tape[tape_head]&1)
 
 if tapes:
 	if '.' in code: print()
