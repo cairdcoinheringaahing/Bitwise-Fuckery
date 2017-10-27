@@ -19,18 +19,25 @@ The flags are:
 
 In addition to this, the while loops are modified so that the condition depends on the final bit of the tape head.
 
-For example, a parity test would be
 
-    ,[>+<[--]]>.
+## Examples
 
-which can be explained as
+### Hello, World!, 260 bytes
 
-    ,            # Take a byte of input;
-     [       ]   # While the tape head is even...
-      >          #   Move the tape head to the left
-       +         #   Increment
-        <        #   Move the tape head to the right
-         [  ]    #   While the tape head is even...
-          --     #     Double decrment (to preserve the bit of the input, and thus the loop)
-              >  # Move the tap head to the right
-               . # Print as ASCII character
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.+++++++++++++++++++++++++++++.+++++++..+++.%++++++++++++++++++++++++++++++++++++++++++++.------------.+++++++++++++++++++++++++++++++++++++++++++++++++++++++.%.+++.------.--------.^%^&+.+
+    
+### Parity Test, 5 + 3 = 8 bytes
+
+A good demonstration of the power of bitwise commands
+
+    ,%+&.
+    
+Uses the `-n` flag to allow for numerical output
+    
+How it works, with `d` (100) as an example input
+
+    ,     - Take a byte of input; TAPES = [100] [0]
+     %    - Swap tapes;           TAPES = [0] [100]
+      +   - Increment;            TAPES = [1] [100]
+       &  - Bitwise AND;          TAPES = [0] [100]
+        . - Output;               OUTPUTS 0
