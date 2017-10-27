@@ -1,5 +1,8 @@
 import sys
 
+if __name__ != '__main__':
+	raise ImportError('Not allowed to import this fuckery')
+
 first_tape = [0]
 second_tape = [0]
 code = sys.argv[1]
