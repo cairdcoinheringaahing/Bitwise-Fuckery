@@ -45,6 +45,10 @@ while code_index < len(code):
 		first_tape, second_tape = second_tape, first_tape
 	if char == "%":
 		first_tape[tape_head], second_tape[tape_head] = second_tape[tape_head], first_tape[tape_head]
+	if char == '{':
+		first_tape[tape_head] <<= second_tape[tape_head]
+	if char == '}':
+		first_tape[tape_head] >>= second_tape[tape_head]
 
 	if char == "+":
 		first_tape[tape_head] += 1
