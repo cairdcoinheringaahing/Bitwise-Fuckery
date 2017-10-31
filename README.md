@@ -11,6 +11,8 @@ This version/derivative adds in 6 new commands to brainfuck, as well as two comm
     ~ - Bitwise NOT
     % - Copy the value under the tape head to the second tape
     @ - Swap the values of the tapes, preserving order
+    { - Bitshift to the left
+    } - Bitshift to the right
     
 The flags are:
 
@@ -24,7 +26,7 @@ In addition to this, the while loops are modified so that the condition depends 
 
 ### Hello, World!, 260 bytes
 
-    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.+++++++++++++++++++++++++++++.+++++++..+++.%++++++++++++++++++++++++++++++++++++++++++++.------------.+++++++++++++++++++++++++++++++++++++++++++++++++++++++.%.+++.------.--------.^%^&+.+
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++.+++++++++++++++++++++++++++++.+++++++..+++.%++++++++++++++++++++++++++++++++++++++++++++.------------.+++++++++++++++++++++++++++++++++++++++++++++++++++++++.%.+++.------.--------.^%^&+.
     
 ### Parity Test, 5 + 3 = 8 bytes
 
