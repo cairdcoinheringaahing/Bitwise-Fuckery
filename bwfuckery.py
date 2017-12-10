@@ -73,9 +73,18 @@ while code_index < len(code):
 		input_index += 1
 	if char == "[":
 		loop_depth += 1
-		if (not first_tape[tape_head]&1):
+		if not first_tape[tape_head]:
 			code_index = nth_index(code, "]", loop_depth, -1)
 	if char == "]":
+		if first_tape[tape_head]:
+			code_index = nth_index(code, "[", loop_depth, 1)
+		else:
+			loop_depth -= 1
+	if char == "(":
+		loop_depth += 1
+		if (not first_tape[tape_head]&1):
+			code_index = nth_index(code, "]", loop_depth, -1)
+	if char == ")":
 		if (first_tape[tape_head]&1):
 			code_index = nth_index(code, "[", loop_depth, 1)
 		else:
